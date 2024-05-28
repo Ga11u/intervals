@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-
 /**
  * This is a program that processes two sets of integer intervals: include intervals and exclude intervals.
  * The program takes these two inputs from the command line.
@@ -19,23 +15,27 @@ import java.util.Scanner;
  * @version 1.0
  *
  */
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+
 public class IntervalsAssignment { // O(nlog(n))
 
     public static void main(String[] args) { 
-        Scanner scanner = new Scanner(System.in);
         String input;
         ArrayList<Interval> includes;
         ArrayList<Interval> excludes;
         ArrayList<Interval> output;
-
-        System.out.println("Enter include intervals (format: start-end, start-end, ...) in one line:");
-        input = scanner.nextLine();
-        includes = readInput(input); // 2n
-        System.out.println("Enter exclude intervals (format: start-end, start-end, ...) in one line:");
-        input = scanner.nextLine();
-        scanner.close();
-        excludes = readInput(input); // 2n
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Enter include intervals (format: start-end, start-end, ...) in one line:");
+            input = scanner.nextLine();
+            includes = readInput(input); // 2n
+            System.out.println("Enter exclude intervals (format: start-end, start-end, ...) in one line:");
+            input = scanner.nextLine();
+            excludes = readInput(input); // 2n
+        }
+        
         includes = mergeIntervals(includes); // n + nlog(n)
         excludes = mergeIntervals(excludes); // n + nlog(n)
         output = intervalDifference(includes, excludes); // 2n

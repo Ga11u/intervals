@@ -1,4 +1,3 @@
-
 /**
  * Interval is a class for representing closed intervals of integers.  
  * It encapsulates the information of the start and end of the interval
@@ -28,7 +27,7 @@ public class Interval implements Comparable<Interval>{
     }
 
     public int getStart() {
-        return start;
+        return this.start;
     }
 
     public void setStart(int start) {
@@ -36,7 +35,7 @@ public class Interval implements Comparable<Interval>{
     }
 
     public int getEnd() {
-        return end;
+        return this.end;
     }
 
     public void setEnd(int end) {
