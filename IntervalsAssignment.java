@@ -30,15 +30,15 @@ public class IntervalsAssignment { // O(nlog(n))
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Enter include intervals (format: start-end, start-end, ...) in one line:");
             input = scanner.nextLine();
-            includes = readInput(input); // 2n
+            includes = readInput(input); // o(2n)
             System.out.println("Enter exclude intervals (format: start-end, start-end, ...) in one line:");
             input = scanner.nextLine();
-            excludes = readInput(input); // 2n
+            excludes = readInput(input); // o(2n)
         }
-        
-        includes = mergeIntervals(includes); // n + nlog(n)
-        excludes = mergeIntervals(excludes); // n + nlog(n)
-        output = intervalDifference(includes, excludes); // 2n
+
+        includes = mergeIntervals(includes); // o(n + nlog(n))
+        excludes = mergeIntervals(excludes); // o(n + nlog(n))
+        output = intervalDifference(includes, excludes); // o(2n)
 
         printResult(output); //n
     }
@@ -77,12 +77,12 @@ public class IntervalsAssignment { // O(nlog(n))
         }
         else {
             // Sort
-            Collections.sort(intervals); // O(nlog(n))
+            Collections.sort(intervals); // o(nlog(n))
 
             // Merge
             int start = intervals.get(0).getStart();
             int end = intervals.get(0).getEnd();
-            for (Interval interval : intervals) { // O(n)
+            for (Interval interval : intervals) { // o(n)
                 if (interval.getStart() <= end) 
                     // Case [{]} --> [} 
                     // Intervals overlap. E.g., 10-20, 15-30 --> 10-30
@@ -111,7 +111,7 @@ public class IntervalsAssignment { // O(nlog(n))
     public static ArrayList<Interval> intervalDifference(ArrayList<Interval> includes, ArrayList<Interval> excludes) {
         ArrayList<Interval> result = new ArrayList<>();
         int i = 0, j = 0;
-        while (i < includes.size() && j < excludes.size()) { // O(2n)
+        while (i < includes.size() && j < excludes.size()) { // o(2n)
             if (includes.get(i).getEnd() < excludes.get(j).getStart()) {
                 // Case: Included interval to the left of the excluded interval (no overlap)
                 result.add(includes.get(i));
